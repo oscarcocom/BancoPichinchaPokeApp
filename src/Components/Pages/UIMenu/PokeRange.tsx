@@ -10,7 +10,7 @@ const PokeRange = styled.input.attrs({ type: 'range' })`
   border-radius: 40px;
   background: ${(props:propsRange) =>
     `linear-gradient(to right, rgb(89, 31, 196) 0%, #6f00ff ${props.value}%, #977fcc9e ${props.value}%, #977fcc85  0%);`};
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.0);
+
 
   ::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -18,7 +18,7 @@ const PokeRange = styled.input.attrs({ type: 'range' })`
     height: 20px;
     background-image: radial-gradient(circle, #4934b0 40%, #162cd4);
     border-radius: 50%;
-    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.0);
+    
   }
 
   ::-moz-range-thumb {
@@ -27,7 +27,7 @@ const PokeRange = styled.input.attrs({ type: 'range' })`
     -moz-appearance: none;
     background-image: radial-gradient(circle, #282895 40%, #271696 45%);
     border-radius: 50%;
-    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.5);
+   
   }
 `;
 

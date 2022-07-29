@@ -1,17 +1,41 @@
-import { useState } from "react";
+import { useState,useCallback } from "react";
 import "./css/App.css";
 import { FiSearch } from "react-icons/fi";
 import { MdAdd } from "react-icons/md";
 import { AiOutlineEdit } from "react-icons/ai";
 import { MdDeleteForever,MdOutlineSave } from "react-icons/md";
 import { RiCloseLine } from "react-icons/ri";
-
-
-
 import PokeRange from "./Components/Pages/UIMenu/PokeRange";
+import { Ataque, Defensa, Search } from "./Interfaces";
+import { PokeAutocomplete } from "./Components/Pages/UIMenu/PokeAutocomplete";
+import { useHandleForm } from './Hooks/useHandleForm';
+
+
+
+
 function App() {
-  const [Ataque, setAtaque] = useState(50);
-  const [Defensa, setDefensa] = useState(50);
+  const [Ataque, setAtaque] = useState<Ataque>(50);
+  const [Defensa, setDefensa] = useState<Defensa >(50);
+  const [SearchInput, setSearchInput] = useState<Search>("")
+  const {values, handleInputChange, reset}=useHandleForm({
+   Name:"",
+   Image:""
+  }) as any
+  const [Show, setShow] = useState(false);
+   
+
+  const LaunchSugges= useCallback(
+    () => {
+      setShow(true)
+    },
+    [],
+  )
+  const handleSearchInput = (event: { target: HTMLInputElement; })=>{
+    LaunchSugges()
+    setSearchInput(event.target.value)
+  }
+  
+ 
 
   return (
     <>
@@ -21,9 +45,15 @@ function App() {
             <label htmlFor="labelSearch">Listado de pokemones</label>
 
             <div className="InputSearchContent">
-              <input type="text" placeholder="Buscar" />
+              <input type="text" placeholder="Buscar" value={SearchInput} onChange={handleSearchInput} />
               <FiSearch className="iconSearch" />
             </div>
+            <PokeAutocomplete
+            input={SearchInput}
+            setSearchInput={setSearchInput}
+            Show={Show}
+            setShow={setShow}
+            />
           </div>
 
           <div className="ButtonBox columna-3 columna-s-12">

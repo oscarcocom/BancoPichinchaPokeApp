@@ -68,7 +68,7 @@
 /* boton de añadir */
  .ButtonBox {
   display: flex;
- justify-content: end;
+ justify-content: Flex-end;
   
 }
  .ButtonBox button span{
@@ -233,3 +233,44 @@ display: inline-block;
 
  }
 
+ .Autocomplete{
+  display: flex;
+  flex-direction: column;
+  width:calc(20% - 26px) ;
+  height: auto;
+  background-color: rgb(179, 237, 237);
+  position: absolute;
+  top: calc(15% - 20px);
+
+ }
+.Option{
+  display: flex;
+  height:auto ;
+  width: 100%;
+   cursor: pointer;
+  /* background-color: red; */
+ 
+}
+.Option span{
+  display: inline-block;
+  width: 50%;
+  color: black;
+  font-size: 1.2em;
+  font-weight: 500;
+   margin: 0.5rem;
+   
+}
+
+ .Autocomplete .Option:nth-last-of-type(2n){
+  background-color: rgba(118, 80, 255, 0.906);
+}
+.imageItem{
+  align-items: center;
+  justify-content: flex-end;
+}
+.imageItem img{
+display: inline-block;
+
+width: 40%;
+height: 70%;
+}
