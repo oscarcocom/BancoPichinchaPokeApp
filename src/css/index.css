@@ -35,7 +35,7 @@ table, td, th {
 
 }
 
-td:not(.CrudTable){
+td:not(.CrudTable,.imgTable){
   display: table-cell;
   vertical-align: center;
   text-align: start;

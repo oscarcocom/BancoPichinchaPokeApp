@@ -128,7 +128,7 @@ display: inline-block;
     text-align: center;
     justify-content: center;
     color: rgb(17, 16, 16);
-    height: 21rem;
+    height: 22rem;
     border: 3px outset rgba(51, 50, 50, 0.129);
     border-collapse: collapse;
   }
@@ -163,16 +163,23 @@ display: inline-block;
   border-radius:5px;
   padding-left: 1.5em;
   font-size: 1em;
-  color: rgba(237, 230, 230, 0.372);
+  color: rgba(163, 147, 147, 0.372);
   font-weight: 600;
   margin-left: 0.7rem;
   
 
 }
-.NombreAdd input, .ImgAdd input:focus{
+ .ImgAdd input:focus{
   outline: none !important;
   border:1.8px solid red;
   box-shadow: 0 0 4px red;
+  color: black;
+}
+.NombreAdd input:focus{
+  outline: none !important;
+  border:1.8px solid red;
+  box-shadow: 0 0 4px red;
+  color: black;
 }
 .NombreAdd label, .ImgAdd label{
   font-weight: 600;
@@ -238,9 +245,10 @@ display: inline-block;
   flex-direction: column;
   width:calc(20% - 26px) ;
   height: auto;
-  background-color: rgb(179, 237, 237);
+  background-color: rgba(25, 236, 236, 0.995);
   position: absolute;
   top: calc(15% - 20px);
+  z-index: 2;
 
  }
 .Option{
@@ -270,7 +278,32 @@ display: inline-block;
 }
 .imageItem img{
 display: inline-block;
-
 width: 40%;
 height: 70%;
+}
+
+.CrudTable, .imgTable{
+
+}
+.imgTble{
+  
+display: inline-block;
+width: 25px;
+height: 30px;
+
+}
+.FormAddPokemon{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+.FormContent{
+  display: flex;
+  width: auto;
+  margin: 0px;
+  padding: 0px;
+  justify-content: space-around;
 }

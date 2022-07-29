@@ -13,9 +13,9 @@ export const useHandleForm = ( initialState = {}) => {
 
 
 
- const  handleInputChange=(event: { target: HTMLInputElement; }) => {
+ const  handleInputChange=(event: React.ChangeEvent<HTMLInputElement>) => {
 
-        setValues({
+     return  setValues({
             ...values,
             [ event.target.name ]: event.target.value
         }) ;
