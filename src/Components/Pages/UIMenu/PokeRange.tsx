@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+//este SC es un custom diseñado propio del maquetado para reaccionar con la ui del user
+
 type propsRange= any;
 const PokeRange = styled.input.attrs({ type: 'range' })`
   -webkit-appearance: none;

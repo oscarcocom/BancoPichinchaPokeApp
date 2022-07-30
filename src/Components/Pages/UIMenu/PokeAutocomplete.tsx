@@ -14,7 +14,7 @@ type flagToChange = boolean;
 
 export const PokeAutocomplete: FC<Props> = ({ input, setSearchInput,setShow,Show,setTableDate }) => {
   const { data, loading, status } = useApiSuggestions<flagToChange>(true);
- 
+ console.log(data)
 const SelectPokeOption =(selected:any)=>{
   setShow(false)
   setSearchInput(selected.name)
@@ -29,7 +29,12 @@ console.log(Show)
 
   return (
     <div className="Autocomplete">
-      {Show ? data.filter((fil:any)=>fil.name.toLowerCase().indexOf(input.toLowerCase()) > -1)
+      {Show ? data.filter((fil:any)=>{
+        if(fil.name.toLowerCase().indexOf(input.toLowerCase())  > -1 
+        || fil.id == input ) return fil
+      
+      }  
+    )
       .map((items:any) => (
             <div key={items.id} className="Option" onClick={()=>SelectPokeOption(items)}>
               <span className="textItem">{items.name}</span>

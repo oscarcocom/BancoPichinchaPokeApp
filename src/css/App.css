@@ -101,6 +101,7 @@ display: inline-block;
     height: 10vh;
   }
 
+
   .CrudTable{
 
     display: table-cell;
@@ -131,6 +132,10 @@ display: inline-block;
     height: 22rem;
     border: 3px outset rgba(51, 50, 50, 0.129);
     border-collapse: collapse;
+  }
+
+  .FormContent:focus{
+    border: 5px outset rgba(245, 11, 11, 1);
   }
   .AddPokemon .fila{
     display: flex;
@@ -245,7 +250,7 @@ display: inline-block;
   flex-direction: column;
   width:calc(20% - 26px) ;
   height: auto;
-  background-color: rgba(25, 236, 236, 0.995);
+  background-color: rgba(237, 241, 241, 0.995);
   position: absolute;
   top: calc(15% - 20px);
   z-index: 2;
@@ -306,4 +311,64 @@ height: 30px;
   margin: 0px;
   padding: 0px;
   justify-content: space-around;
+}
+.LoaderBotton{
+  background-color: coral;
+  font-size: 0.9rem;
+  cursor: not-allowed;
+  
+}
+.LoaderBotton:hover{
+  background-color: coral !important;
+  font-size: 0.9rem;
+  /* cursor: not-allowed; */
+  
+}
+
+.ShowPokeNotification {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(96, 87, 219, 0.663);
+  transition: opacity 500ms;
+   visibility: visible;
+  opacity: 2;
+  z-index: 1;
+}
+
+
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: rgb(223, 222, 229);
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #8042d3;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
 }
