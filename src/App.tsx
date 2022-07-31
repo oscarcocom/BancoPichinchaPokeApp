@@ -13,6 +13,8 @@ import {
 } from "./Interfaces/Pokemon-Api-post";
 import { PokeNotification } from "./Components/Pages/UIMenu/PokeNotification";
 import { ContainerFormPokemon } from "./Components/Pages/UIMenu/ContainerFormPokemon";
+import pokeApi from './Api/getApi';
+import { TopLevelDelete } from './Interfaces/Pokemon-Api-delete';
 
 function App() {
   // formCrud
@@ -55,6 +57,7 @@ function App() {
   //pop de alerta
 
   const NewPokenon = async () => {
+    setShow(false);
     setAtaque(0);
     setDefensa(0);
     setFormCrud({
@@ -84,8 +87,11 @@ function App() {
     Defense: "Waiting...",
   });
 
-  const ChargerToForm = () => {
 
+
+
+  const ChargerToForm = () => {
+    setShow(false);
     if(name == "Waiting..."){
       setPokePopMessage({
         Visible: true,
@@ -107,6 +113,89 @@ function App() {
       ...f,
       CurrentMethod:"Put"
     }))
+  };
+
+  const DeletePokemon = () => {
+    setShow(false);
+    setApiLoader(true);
+
+
+   
+    console.log(IdPomenon)
+
+
+    if([name,Image].includes("Waiting...") ){
+      setPokePopMessage({
+        Visible: true,
+        Message:
+          "No hay seleccion que eliminar, La tabla sigue en espera de que usted selecione un pokemon ya que el status actual es waiting... ",
+      })
+      setApiLoader(false);
+      return;
+     }
+
+ 
+  
+     const Load = async () =>
+     await pokeApi
+       .delete<TopLevelDelete>(`${Id}`)
+       .then((pokeData) => {
+         console.log(pokeData);
+         
+
+         setApiMethod((f:any)=>({
+           ...f,
+           responseStatus:"DELETE ALL DONE !"
+         }));
+
+         setPokePopMessage({
+           Visible: true,
+           Message: `Operación DELETE exitosa con estatus de operación: ${pokeData.status} ${pokeData.statusText},ya puede verificar que el pokemon ${Name}  se elimino en la Api texteando en el input de busqueda para no encontrarlo `,
+         });
+
+  
+      
+    
+
+       })
+       .catch((error) => {
+         // console.error(error)
+         setPokePopMessage({
+           Visible: true,
+           Message: `Error sucedido ${error}`,
+         });
+         
+       })
+       .finally(() =>{
+       
+       
+         setApiLoader(false)
+         
+         });
+
+   Load();
+      // RESETEAMOS LA DATA DE TODOS LOS STATES Y OBTENEMOS LA NUEVA SUGERENCIA ACTUALIZADA
+       //I RESET STATE FLAG TO GET NEW DATA
+       setApiMethod({
+        CurrentMethod: "Post",
+         responseStatus:"OK"
+       });  
+         setAtaque(0);
+          setDefensa(0);
+          setFormCrud({
+            IdPomenon:0,
+            Name: "",
+            Imagen: "",
+          });
+       setTableDate({
+        Id:0,
+        name: "Waiting...",
+        Image: "",
+        attack: "Waiting...",
+        Defense: "Waiting...",
+      });
+
+    
   };
  
   const LaunchSugges = useCallback(() => {
@@ -194,7 +283,7 @@ function App() {
                 <span onClick={ChargerToForm}>
                   <AiOutlineEdit />
                 </span>
-                <span>
+                <span onClick={DeletePokemon}>
                   <MdDeleteForever />
                 </span>
               </td>
