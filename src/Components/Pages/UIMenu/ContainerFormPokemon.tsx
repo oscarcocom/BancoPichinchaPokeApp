@@ -3,7 +3,7 @@ import { RiCloseLine } from "react-icons/ri";
 import { TbLoader } from "react-icons/tb";
 import PokeRange from './PokeRange';
 import {MdOutlineSave } from "react-icons/md";
-import { TopLevelPost } from '../../../Interfaces/Pokemon-Api-post';
+import { TopLevelPost, TopLevelPut } from '../../../Interfaces/Pokemon-Api-post';
 import pokeApi from '../../../Api/getApi';
 
 interface ProposContainer{
@@ -19,8 +19,10 @@ interface ProposContainer{
     setDefensa:(param:any)=>void,
     Defensa:any,
     setApiLoader:(param:any)=>void,
-    setPokePopMessage:(param:any)=>void
-    
+    setPokePopMessage:(param:any)=>void;
+    IdPomenon:number,
+    setApiMethod:(param:any)=>void;
+  
 }
 export const ContainerFormPokemon:FC<ProposContainer>=(
     {
@@ -36,7 +38,10 @@ export const ContainerFormPokemon:FC<ProposContainer>=(
         Defensa,
         setDefensa,
         setApiLoader,
-        setPokePopMessage
+        setPokePopMessage,
+        IdPomenon,
+        setApiMethod
+                                        
     
     }) => {
 
@@ -85,10 +90,95 @@ export const ContainerFormPokemon:FC<ProposContainer>=(
                   type: "Dragon",
                 })
                 .then((pokeData) => {
+
+                  setApiMethod((f:any)=>({
+                    ...f,
+                    responseStatus:"POST ALL DONE !"
+                  }));
                   console.log(pokeData);
                   setPokePopMessage({
                     Visible: true,
-                    Message: `Operación POST exitosa con estatus de operación: ${pokeData.status} ${pokeData.statusText} `,
+                    Message: `Operación POST exitosa con estatus de operación: ${pokeData.status} ${pokeData.statusText}, ya puede buscar su nuevo pokemon ${Name}  en la Api texteando en el input de busqueda `,
+                  });
+                
+
+               
+
+                })
+                .catch((error) => {
+                  // console.error(error)
+                  setPokePopMessage({
+                    Visible: true,
+                    Message: `Error sucedido ${error}`,
+                  });
+                })
+                .finally(() => {
+               
+               
+                  setApiLoader(false)
+                });
+        
+            Load();
+                // RESETEAMOS LA DATA SIN PERDER EL METODO REST PARA ACTUALIZAR LAS SUGERENCIAS
+                //I RESET STATE FLAG TO GET NEW DATA
+            setApiMethod((f:any)=>({
+              ...f,
+              responseStatus:"OK"
+            }));  
+          };
+          const HandleCrudPut =  (e: React.FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
+        
+            setApiLoader(true);
+        
+            if ([Name, Imagen].includes("")) {
+              setPokePopMessage({
+                Visible: true,
+                Message: "Hay campos Input vacio",
+              });
+              setApiLoader(false);
+              return;
+            }
+            if (Ataque <= 0) {
+              setPokePopMessage({
+                Visible: true,
+                Message: "El pokemon debe tener un ataque arriba de 0",
+              });
+              setApiLoader(false);
+              return;
+            }
+            if (Defensa <= 0) {
+              setPokePopMessage({
+                Visible: true,
+                Message: "El pokemon debe tener una Defensa arriba de 0",
+              });
+              setApiLoader(false);
+              return;
+            }
+        
+            const Load = async () =>
+              await pokeApi
+                .put<TopLevelPut>(`${IdPomenon}`, {
+                  name: Name,
+                  image: Imagen,
+                  attack: Ataque,
+                  defense: Defensa,
+                  hp: 100,
+                  type: "Dragon",
+                  idAuthor: 1
+                })
+                .then((pokeData) => {
+                  console.log(pokeData);
+                  
+
+                  setApiMethod((f:any)=>({
+                    ...f,
+                    responseStatus:"PUT ALL DONE !"
+                  }));
+
+                  setPokePopMessage({
+                    Visible: true,
+                    Message: `Operación PUT exitosa con estatus de operación: ${pokeData.status} ${pokeData.statusText},ya puede verificar su actualizacion para el pokemon ${Name} en la Api texteando en el input de busqueda  `,
                   });
                 })
                 .catch((error) => {
@@ -98,11 +188,21 @@ export const ContainerFormPokemon:FC<ProposContainer>=(
                     Message: `Error sucedido ${error}`,
                   });
                 })
-                .finally(() => setApiLoader(false));
+                .finally(() =>{
+                  // RESETEAMOS LA DATA SIN PERDER EL METODO REST
+                
+                  setApiLoader(false)
+                  
+                  });
         
             Load();
+               // RESETEAMOS LA DATA SIN PERDER EL METODO REST PARA ACTUALIZAR LAS SUGERENCIAS
+                //I RESET STATE FLAG TO GET NEW DATA
+                setApiMethod((f:any)=>({
+                  ...f,
+                  responseStatus:"OK"
+                }));  
           };
-          const HandleCrudPut = () => {};
         
 
   return (
@@ -110,11 +210,18 @@ export const ContainerFormPokemon:FC<ProposContainer>=(
    
        <div className="fila">
             <div className="titleAddBox columna-s-12 columna-6">
-              <h4>Nuevo Pokemon</h4>
+              
+                {
+                    HandleMethod=="Post"?
+                   <h4>Nuevo Pokemon</h4> 
+                    : 
+                    <h4 >Ahora se actualiza al pokemon : <p style={{ display:"inline-block", color:"purple"}}>{Name}</p></h4>
+                }
+                
             </div>
           </div>
           <div className="fila">
-            <form onSubmit={HandleMethod=="Post"?HandleCrudPost:HandleCrudPost } className="FormAddPokemon">
+            <form onSubmit={HandleMethod=="Post"?HandleCrudPost:HandleCrudPut } className="FormAddPokemon">
               <div  className="FormContent">
                 {/* inputs */}
                 <div className="inputsBox columna-s-12 columna-8">

@@ -12,6 +12,20 @@ export interface TopLevelPost {
   
 }
 
+
+
+export interface TopLevelPut {
+    id:        number;
+    name:      string;
+    image:     string;
+    attack:    number;
+    defense:   number;
+    hp:        number;
+    type:      string;
+    id_author: number;
+}
+
+
 export type LoadCrud= boolean
 export type PokePopMessage= {
     Visible:boolean,

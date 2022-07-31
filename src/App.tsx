@@ -7,7 +7,6 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { Ataque, Defensa, Search } from "./Interfaces";
 import { PokeAutocomplete } from "./Components/Pages/UIMenu/PokeAutocomplete";
-import pokeApi from "./Api/getApi";
 import {
   LoadCrud,
   PokePopMessage
@@ -21,18 +20,20 @@ function App() {
   const [{ Visible, Message }, setPokePopMessage] = useState<PokePopMessage>({
     Visible: false,
     Message:
-      "Operación POST exitosa, Nuevo pokemon creado !, Ahora puede buscar nuevo registro",
+      "",
   });
   const [Ataque, setAtaque] = useState<Ataque>(50);
   const [Defensa, setDefensa] = useState<Defensa>(50);
   const [SearchInput, setSearchInput] = useState<Search>("");
-  const [{ Name, Imagen }, setFormCrud] = useState({
+  const [{IdPomenon, Name, Imagen }, setFormCrud] = useState({
+    IdPomenon:0,
     Name: "",
     Imagen: "",
   });
 
-  const [{CurrentMethod}, setApiMethod] = useState({
-    CurrentMethod: "Post"
+  const [{CurrentMethod,responseStatus}, setApiMethod] = useState({
+    CurrentMethod: "Post",
+    responseStatus:"OK"
   });
 
   console.log(Name);
@@ -57,10 +58,16 @@ function App() {
     setAtaque(0);
     setDefensa(0);
     setFormCrud({
+      IdPomenon:0,
       Name: "",
       Imagen: "",
     });
     await InputName.current?.focus();
+
+    setApiMethod( (f) =>({
+      ...f,
+      CurrentMethod:"Post"
+    }))
   };
 
   // Flag de sugerencias
@@ -69,7 +76,8 @@ function App() {
 
   // state Table
 
-  const [{ name, Image, attack, Defense }, setTableDate] = useState({
+  const [{Id, name, Image, attack, Defense }, setTableDate] = useState({
+    Id:0,
     name: "Waiting...",
     Image: "",
     attack: "Waiting...",
@@ -77,12 +85,28 @@ function App() {
   });
 
   const ChargerToForm = () => {
+
+    if(name == "Waiting..."){
+      setPokePopMessage({
+        Visible: true,
+        Message:
+          "La tabla sigue en espera de que usted selecione un pokemon ya que el status actual es waiting... ",
+      })
+  
+      return;
+     }
     setAtaque(attack);
     setDefensa(Defense);
     setFormCrud({
+      IdPomenon:Id,
       Name: name,
       Imagen: Image,
     });
+
+    setApiMethod( (f) =>({
+      ...f,
+      CurrentMethod:"Put"
+    }))
   };
  
   const LaunchSugges = useCallback(() => {
@@ -123,6 +147,7 @@ function App() {
               Show={Show}
               setShow={setShow}
               setTableDate={setTableDate}
+              responseStatus={responseStatus}
             />
           </div>
 
@@ -180,6 +205,7 @@ function App() {
           <ContainerFormPokemon
             HandleMethod={CurrentMethod}
             InputName={InputName}
+            IdPomenon={IdPomenon}
             Name={Name}
             HandleFormCrud={HandleFormCrud}
             InputImagen={InputImagen}
@@ -191,6 +217,8 @@ function App() {
             setDefensa={setDefensa}
             setApiLoader={setApiLoader}
             setPokePopMessage={setPokePopMessage}
+            setApiMethod={setApiMethod}
+            
           />
         </div>
       </div>

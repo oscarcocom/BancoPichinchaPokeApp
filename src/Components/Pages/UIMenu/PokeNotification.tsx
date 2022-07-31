@@ -22,7 +22,7 @@ export const PokeNotification:FC<Props> = ({Visible,Message, setPokePopMessage})
           <a className="close" 
              onClick={()=>setPokePopMessage({
               Visible:false,
-              Message:"Operacion hecha"
+              Message:"Sin operacion por mostrar"
              })}
              href="#">
             &times;

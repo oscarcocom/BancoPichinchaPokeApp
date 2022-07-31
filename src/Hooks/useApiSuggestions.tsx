@@ -8,7 +8,7 @@ interface Data {
   status: boolean;
 }
 
-export const useApiSuggestions =  <T extends Boolean >(Flag:T) => {
+export const useApiSuggestions =  <T extends string >(responseStatus:T) => {
   const [{ data, loading, status }, setData] = useState<Data>({
     data: [],  
     loading: false,
@@ -17,7 +17,10 @@ export const useApiSuggestions =  <T extends Boolean >(Flag:T) => {
 
 useEffect(() => {
 
-  setData((state:any)=>({...state,loading:true}))
+
+
+    console.log("Preparando sugerencias Ing osmar....");
+    setData((state:any)=>({...state,loading:true}))
  
  const Load = async()=> await pokeApi.get<TopLevel>(`?idAuthor=1`).then((pokeData)=>{
     setData({data:pokeData.data,loading:false,status:true})
@@ -37,8 +40,11 @@ useEffect(() => {
   })
  }
 
+
+
+
 // Preparamos la bandera para cuando el usuario haga uso del CRUD y solicitemos una nueva consulta get
- }, [Flag])
+ }, [responseStatus])
  
 // Retornamos nuestros datos del state 
   return { data, loading, status };
