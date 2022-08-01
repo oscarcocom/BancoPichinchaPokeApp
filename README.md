@@ -6,6 +6,8 @@ Jest ✅
 
 TDD ✅
 
+Responsive Css ✅
+
 CSS sin librerias ✅
 
 Hooks utilizados (useRef,useState,useCallback,useEffect)✅
