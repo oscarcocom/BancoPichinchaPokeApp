@@ -1,4 +1,4 @@
-Proyecto Banco Pichincha para test de habilidades frontend
+Proyecto Banco Pichincha
 
 Typescript ✅
 
