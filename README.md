@@ -1,6 +1,9 @@
-# Getting Started with Create React App
-
-This proyect has how objetive show skill
+Proyecto Banco Pichincha para test de habilidades frontend
+Typescript ✅
+Jest ✅
+TDD ✅
+CSS sin librerias ✅
+Hooks utilizados (useRef,useState,useCallback,useEffect)✅
 
 Developer: Ing. Oscar cocom
 e-mail: yosoy@oscarcocom.com
