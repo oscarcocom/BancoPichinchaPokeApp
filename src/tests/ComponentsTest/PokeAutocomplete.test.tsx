@@ -2,6 +2,10 @@ import { render, renderHook } from "@testing-library/react"
 import { PokeAutocomplete } from '../../Components/Pages/UIMenu/PokeAutocomplete';
 import { useState } from 'react';
 
+//APLICACION TDD 
+// RED AL NO MATCH CON SCREEN
+//GREEN AL MATCH
+// REFACTOR DONE
 
 describe('Prueba de snapshoot al componente <PokeAutocomplete>', () => {
 
@@ -44,6 +48,7 @@ test('Mostrar sugerencias del API', () => {
         setTableDate={   result.current.setTableDate}
         responseStatus={  result.current.responseStatus}
         />)
+
 
        expect(container).toMatchSnapshot() 
  })

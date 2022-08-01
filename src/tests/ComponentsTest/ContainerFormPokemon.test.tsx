@@ -1,6 +1,10 @@
 import { render, renderHook } from "@testing-library/react";
 import { useState, useRef } from "react";
 import { ContainerFormPokemon } from "../../Components/Pages/UIMenu/ContainerFormPokemon";
+//APLICACION TDD 
+// RED AL NO MATCH CON SCREEN
+//GREEN AL MATCH
+// REFACTOR DONE
 
 const { result } = renderHook(() => {
   const [{ IdPomenon, Name, Imagen }, setFormCrud] = useState({
