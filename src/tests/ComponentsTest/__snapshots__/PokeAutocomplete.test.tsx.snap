@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Prueba de snapshoot al componente <PokeAutocomplete> Mostrar sugerencias del API 1`] = `
+<div>
+  <div
+    class="Autocomplete"
+  />
+</div>
+`;

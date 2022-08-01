@@ -19,7 +19,7 @@ useEffect(() => {
 
 
 
-    console.log("Preparando sugerencias Ing osmar....");
+    // console.log("Preparando sugerencias Ing osmar....");
     setData((state:any)=>({...state,loading:true}))
  
  const Load = async()=> await pokeApi.get<TopLevel>(`?idAuthor=1`).then((pokeData)=>{

@@ -1,5 +1,5 @@
 import React,{FC} from "react";
-import { PokePopMessage } from '../../../Interfaces/Pokemon-Api-post';
+
 
 interface Props{
     Visible:boolean,

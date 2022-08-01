@@ -56,7 +56,9 @@ function App() {
   const InputImagen = useRef<HTMLInputElement>(null);
   //pop de alerta
 
-  const NewPokenon = async () => {
+  const NewPokenon = async (e:any) => {
+
+    e.preventDefault()
     setShow(false);
     setAtaque(0);
     setDefensa(0);
@@ -92,7 +94,7 @@ function App() {
 
   const ChargerToForm = () => {
     setShow(false);
-    if(name == "Waiting..."){
+    if(name === "Waiting..."){
       setPokePopMessage({
         Visible: true,
         Message:
@@ -307,6 +309,7 @@ function App() {
             setApiLoader={setApiLoader}
             setPokePopMessage={setPokePopMessage}
             setApiMethod={setApiMethod}
+            NewPokenon={NewPokenon}
             
           />
         </div>

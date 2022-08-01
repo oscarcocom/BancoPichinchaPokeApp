@@ -22,6 +22,7 @@ interface ProposContainer{
     setPokePopMessage:(param:any)=>void;
     IdPomenon:number,
     setApiMethod:(param:any)=>void;
+    NewPokenon:(param:any)=>void;
   
 }
 export const ContainerFormPokemon:FC<ProposContainer>=(
@@ -40,7 +41,8 @@ export const ContainerFormPokemon:FC<ProposContainer>=(
         setApiLoader,
         setPokePopMessage,
         IdPomenon,
-        setApiMethod
+        setApiMethod,
+        NewPokenon
                                         
     
     }) => {
@@ -212,7 +214,7 @@ export const ContainerFormPokemon:FC<ProposContainer>=(
             <div className="titleAddBox columna-s-12 columna-6">
               
                 {
-                    HandleMethod=="Post"?
+                    HandleMethod==="Post"?
                    <h4>Nuevo Pokemon</h4> 
                     : 
                     <h4 >Ahora se actualiza al pokemon : <p style={{ display:"inline-block", color:"purple"}}>{Name}</p></h4>
@@ -221,7 +223,7 @@ export const ContainerFormPokemon:FC<ProposContainer>=(
             </div>
           </div>
           <div className="fila">
-            <form onSubmit={HandleMethod=="Post"?HandleCrudPost:HandleCrudPut } className="FormAddPokemon">
+            <form onSubmit={HandleMethod==="Post"?HandleCrudPost:HandleCrudPut } className="FormAddPokemon">
               <div  className="FormContent">
                 {/* inputs */}
                 <div className="inputsBox columna-s-12 columna-8">
@@ -289,9 +291,9 @@ export const ContainerFormPokemon:FC<ProposContainer>=(
                     <span>Guardar</span>
                   </button>
                     }
-                    <button>
+                    <button onClick={NewPokenon} >
                       <RiCloseLine className="icons" />
-                      <span>Cancelar</span>
+                      <span >Cancelar</span>
                     </button>
                   </div>
                 </div>

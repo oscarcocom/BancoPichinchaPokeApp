@@ -40,10 +40,10 @@ export const PokeAutocomplete: FC<Props> = ({
     <div className="Autocomplete">
       {Show
         ? data
-            .filter((fil: any) => {
+            .filter((fil: any) =>  {
               if (
                 fil.name.toLowerCase().indexOf(input.toLowerCase()) > -1 ||
-                fil.id == input
+                fil.id === input
               )
                 return fil;
             })
